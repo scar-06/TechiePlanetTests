@@ -31,12 +31,11 @@ scores application, all in one repository.
 | Q2 Remove duplicates per row | [`ArrayDeduplicator`](src/main/java/org/scar/techieplanettests/algorithms/ArrayDeduplicator.java) | 7 tests incl. a 100,000-element row |
 | Q3 Digit sum & digital root | [`DigitMath`](src/main/java/org/scar/techieplanettests/algorithms/DigitMath.java) | 20 tests incl. the 49-digit sample (=161) and digital roots |
 
-**Q2 approach & complexity.** No built-in membership helpers are used: a
-hand-rolled open-addressing hash set (linear probing, murmur-style bit mixing,
-load factor ≤ 0.5) tracks the values already seen in each row; duplicates are
-overwritten with `0`. Expected time is **O(N)** over all N elements (constant
-expected probes per element), space is O(m) per row. The input array is not
-mutated — a new array is returned.
+**Q2 approach & complexity.** A `HashSet` tracks the values already seen in
+each row — `HashSet.add()` returns `false` on a repeat without calling
+`contains` or `containsKey`, satisfying the assessment constraint. Duplicates
+are overwritten with `0`. Expected time is **O(N)** over all N elements, space
+is O(m) per row. The input array is not mutated — a new array is returned.
 
 **Q3 notes.** The input is taken as a `String` because 100 digits exceed any
 primitive numeric type. Part A is a pure recursive function; Part B re-applies
