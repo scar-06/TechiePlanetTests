@@ -48,22 +48,15 @@ public final class TimeInWords {
     public static String toWords(int hour, int minute) {
         validate(hour, minute);
 
-        if (minute == 0) {
-            return hourInWords(hour) + " o'clock";
-        }
-        if (minute == QUARTER_HOUR) {
-            return "quarter past " + hourInWords(hour);
-        }
-        if (minute == HALF_HOUR) {
-            return "half past " + hourInWords(hour);
-        }
-        if (minute == THREE_QUARTER_HOUR) {
-            return "quarter to " + hourInWords(nextHour(hour));
-        }
-        if (minute < HALF_HOUR) {
-            return minutesInWords(minute) + " past " + hourInWords(hour);
-        }
-        return minutesInWords(MINUTES_IN_HOUR - minute) + " to " + hourInWords(nextHour(hour));
+        return switch (minute) {
+            case 0                  -> hourInWords(hour) + " o'clock";
+            case QUARTER_HOUR       -> "quarter past " + hourInWords(hour);
+            case HALF_HOUR          -> "half past " + hourInWords(hour);
+            case THREE_QUARTER_HOUR -> "quarter to " + hourInWords(nextHour(hour));
+            default                 -> minute < HALF_HOUR
+                    ? minutesInWords(minute) + " past " + hourInWords(hour)
+                    : minutesInWords(MINUTES_IN_HOUR - minute) + " to " + hourInWords(nextHour(hour));
+        };
     }
 
     /**
