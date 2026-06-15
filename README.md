@@ -35,7 +35,8 @@ scores application, all in one repository.
 each row — `HashSet.add()` returns `false` on a repeat without calling
 `contains` or `containsKey`, satisfying the assessment constraint. Duplicates
 are overwritten with `0`. Expected time is **O(N)** over all N elements, space
-is O(m) per row. The input array is not mutated — a new array is returned.
+is O(m) for the set (m = longest row) plus O(N) for the result copy. The input
+array is not mutated — a new array is returned.
 
 **Q3 notes.** The input is taken as a `String` because 100 digits exceed any
 primitive numeric type. Part A is a pure recursive function; Part B re-applies
